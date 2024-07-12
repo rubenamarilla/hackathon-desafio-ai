@@ -1,12 +1,6 @@
-import {
-  forwardRef,
-  useContext,
-  useEffect,
-  useImperativeHandle,
-  useRef
-} from "react"
+import { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from 'react'
 
-import { GoogleMapsContext, latLngEquals } from "@vis.gl/react-google-maps"
+import { GoogleMapsContext, latLngEquals } from '@vis.gl/react-google-maps'
 
 function useCircle(props) {
   const {

@@ -1,19 +1,13 @@
-import { useEffect, useState, useRef, useCallback } from "react"
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import {
-    APIProvider,
-    Map,
-    useMap,
-    AdvancedMarker,
-    Pin
-} from "@vis.gl/react-google-maps"
+import { AdvancedMarker, APIProvider, Map, Pin, useMap } from '@vis.gl/react-google-maps'
 
-import { MarkerClusterer } from "@googlemaps/markerclusterer"
+import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import { Circle } from './Circle.jsx'
 
 const center = {
-    lat: -25.2637,
-    lng: -57.5759,
+    lat: -27.33056,
+    lng: -55.86667,
 };
 
 const MapComponent = ({locations=[]}) => (
