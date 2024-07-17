@@ -10,32 +10,34 @@ const center = {
     lng: -55.86667,
 };
 
-const MapComponent = ({locations=[]}) => (
-  <div className="map">
-  <APIProvider
-    apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-    onLoad={() => console.log("Maps API has loaded.")}
-  >
-      <Map
-        defaultZoom={13}
-        defaultCenter={center}
-        onCameraChanged={ev =>
-          console.log(
-            "camera changed:",
-            ev.detail.center,
-            "zoom:",
-            ev.detail.zoom
-          )
-        }
-        mapId="da37f3254c6a6d1c"
-      >
-          <PoiMarkers pois={locations} />
-      </Map>
-  </APIProvider>
-  </div>
-)
+const MapComponent = ({locations=[]}) => {
+    return (
+      <div className="map">
+          <APIProvider
+            apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+            onLoad={() => console.log("Maps API has loaded.")}
+          >
+              <Map
+                defaultZoom={13}
+                defaultCenter={center}
+                onCameraChanged={ev =>
+                  console.debug(
+                    "camera changed:",
+                    ev.detail.center,
+                    "zoom:",
+                    ev.detail.zoom
+                  )
+                }
+                mapId="da37f3254c6a6d1c"
+              >
+                  <PoiMarkers locations={locations}/>
+              </Map>
+          </APIProvider>
+      </div>
+    );
+}
 
-const PoiMarkers = props => {
+const PoiMarkers = ({locations=[]}) => {
     const map = useMap()
     const [markers, setMarkers] = useState({})
     const clusterer = useRef(null)
@@ -43,7 +45,6 @@ const PoiMarkers = props => {
     const handleClick = useCallback(ev => {
         if (!map) return
         if (!ev.latLng) return
-        console.log("marker clicked: ", ev.latLng.toString())
         map.panTo(ev.latLng)
         setCircleCenter(ev.latLng)
     })
@@ -87,21 +88,21 @@ const PoiMarkers = props => {
             fillColor={"#3b82f6"}
             fillOpacity={0.3}
           />
-          {props.pois.map(poi => (
+          {locations.map(poi => (
             <AdvancedMarker
+              title={poi.key}
               key={poi.key}
               position={poi.location}
-              ref={marker => setMarkerRef(marker, poi.key)}
               clickable={true}
               onClick={handleClick}
             >
                 <Pin
-                  background={"#FBBC04"}
-                  glyphColor={"#000"}
-                  borderColor={"#000"}
+                  background={'#FBBC04'}
+                  glyphColor={'#1a70fd'}
+                  borderColor={'#1a70fd'}
                 />
             </AdvancedMarker>
-          ))}
+              ))}
       </>
     )
 }

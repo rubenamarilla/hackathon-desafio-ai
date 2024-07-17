@@ -2,7 +2,7 @@
 
 ## Introducción:
 
-Tu desafío es crear un chat bot integrado a un mapa que permita a los usuarios
+El desafío de tu equipo es crear un chat bot integrado a un mapa que permita a los usuarios
 buscar y visualizar lugares turísticos o de interés, los cuales se deberán visualizar en un mapa.
 Utilizarás la API de OpenAI para obtener información sobre estos lugares y se te proporcionará código
 para mostrar los resultados en el mapa con marcadores pintados. 
@@ -18,12 +18,13 @@ A continuación proporcionamos una guía detallada para la resolución del desaf
 ### Chatbot Integrado con Mapa:
 * El usuario debe poder hacer consultas a un chatbot sobre lugares turísticos o de interés.
 * El chatbot debe utilizar la API de OpenAI para obtener la información solicitada.
-* Las respuestas deben estar en un formato JSON compatible con la librería vis.gl/react-google-maps.
+* Las respuestas deben estar en un formato JSON compatible con la librería **vis.gl/react-google-maps.**
 
-### Listado de Tarjetas en Modal:
-Los participantes deben implementar un modal que contenga un listado en forma de tarjetas con la información
-sobre los lugares devueltos por el chatbot. Esto puede ser un modal general con info de todos los lugares 
-devueltos. No es necesario construir algo complejo, como mostrar modales únicos para cada marcador.
+### Información de lugares:
+Cada equipo debe implementar un componente que contenga tarjetas de información sobre los lugares devueltos por el chatbot. 
+La forma de presentar esta información queda a creatividad de cada equipo. Por ejemplo, puede ser un modal general con tarjetas de 
+info sobre todos los lugares devueltos. No es necesario construir algo muy complejo, por ejemplo, mostrar modales 
+únicos al presionar cada marcador, aunque esto queda a criterio de cada equipo.
 
 ### Visualización de Marcadores:
 Los usuarios deben poder visualizar los puntos actualizados en el mapa con marcadores pintados. **Esta parte del código será proporcionada. Lo 
@@ -112,6 +113,9 @@ El chatbot debe poseer las siguientes características:
     ...
 ]
 ```
+
+El campo **location** es muy importante, pues debe contener la información de la latitud y longitud para poder pintar los marcadores en el mapa.
+
 #### Librería de OpenAI
 La librería para realizar consultas a la api de OpenAI ya se encuentra instalada en el proyecto:
 A continuación dejamos la guía de como configurarla y otros detalles:
@@ -149,6 +153,8 @@ Esta se puede acceder mediante la librería ya instalada en el proyecto y puedes
 * [gpt-4o](https://platform.openai.com/docs/models/gpt-4o)
 
 La documentación de la API se provee además en la sección de [Recursos](#Recursos).
+
+> Es importante que cada equipo se tome un tiempo para leer la documentación. Esto será de gran ayuda para resolver el desafío.
 
 ### Diseño del Prompt e integración con el MAPA:
 
@@ -206,27 +212,53 @@ El resultado, cuando se utiliza el formato correcto, queda de la siguiente maner
 
 ![marcadores.png](public/marcadores.png)
 
-### Modal y Tarjetas:
-Se debe crear un modal que se active al hacer clic con un botón de la interfaz.
-Dentro del modal, se debe mostrar un listado de tarjetas con la información de los lugares devueltos por el chatbot.
+### Tarjetas con información de los lugares:
+Cada equipo debe implementar un componente que permita visualizar la información de los lugares encontrados. 
 
 Cada tarjeta debe contener al menos los siguientes datos: 
-* **nombre**,
-* **tipo**
-* **descripción**
-* **dirección**,
+* **nombre**. El nombre del lugar
+* **tipo**. Qué tipo de lugar es, turístico, tecnología, gastronómico, etc.
+* **descripción**. Una descripción con un texto devuelto por el chat-bot explicando por qué el lugar fué incluido en la lista.
+* **dirección**. La dirección del lugar.
 
-Se provee una pequeña ayuda con un componente pre-construido denominado [Loader](src%2Fcomponents%2FLoader.jsx) 
-que muestra un modal con indicador de carga. 
-El mismo puede ser utilizado a gusto por los participantes para esta sección. Queda a criterio del participante la decisión de utilizarlo y de cómo utilizarlo.
 
-Se provee además un componente denominado [Card](src%2Fcomponents%2FCard.jsx) que se puede utilizar para las tarjetas 
+#### Ayudas
+Como ejemplo, el componente podría consistir en un modal que se abre con un botón y muestra el listado de los lugares en forma de tarjetas,
+pero esto queda abierto a las ideas de cada equipo.
+
+Se proveen algunos componentes de ayuda. Cada equipo es libre de usar estos componentes o crear sus propios componentes con estilos a gusto. 
+
+Para las tarjetas se provee una pequeña ayuda, un componente denominado [Card](src%2Fcomponents%2FCard.jsx) que se puede utilizar para las tarjetas 
 de información. El mismo tiene los props **nombre, tipo, direccion y descripcion**. Como utilizarlo en una lista
 queda a la creatividad de los participantes.
 
-Los participantes son libres de usar estos componentes o crear sus propios componentes con estilos a gusto. Un ejemplo de como se podrían ver las tarjetas:
-
+Un ejemplo de como se podrían ver las tarjetas:
 ![tarjetas.png](public/tarjetas.png)
+
+También se provee un componente pre-construido denominado [LoaderModal](src%2Fcomponents%2FLoaderModal.jsx)
+que muestra un diálogo con indicador de carga, que funciona como feedback para el usuario final.
+El mismo puede ser utilizado a gusto por los participantes para esta sección.
+Queda a criterio del participante la decisión de utilizarlo y de cómo utilizarlo.
+
+## Desafío BONUS
+
+Esta parte del desafío no es obligatoria, pero podría dar puntos adicionales al equipo en caso de ser completada.
+Para completar esta sección, necesariamente el equipo tuvo que haber completado las anteriores.
+
+### Chatbot con lugares restringidos
+
+En esta sección el equipo debe realizar lo siguiente:
+
+En la carpeta assets se encuentra el siguiente archivo: [lugares.json](src%2Fassets%2Flugares.json). El mismo contiene una lista finita
+de lugares.
+
+El equipo debe crear un nuevo componente de Chatbot que reciba en el prompt de contexto la lista de lugares
+del archivo, como JSON. En otras palabras, se debe modificar el prompt de contexto para que la api tome estos lugares como base de datos 
+donde buscar.
+
+El equipo debe generar un nuevo componente de chatbot para implementar esta funcionalidad. Se puede duplicar el componente existente, colocarle un
+nombre diferente y hacer las modificaciones correspondientes. Ejemplo, si el componente que contiene el chatbot normal se llama 'Chatbot'
+se puede duplicar y llamarlo 'BonusChatbot'.
 
 ## Flujo de trabajo
 
@@ -258,6 +290,10 @@ puedan revisarlo.
 * **Utilización de GIT:** Creación de ramas y generación de Pull Request.
 
 ## TIPS
+
+>Utiliza características de ES6 para acelerar tu desarrollo. Por ejemplo,
+>[template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) o
+>[async/await](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/async_function).
 
 >El diseño de los prompts es fundamental para obtener los resultados deseados del chat-bot. Ten presente esto durante 
 >el desarrollo del desafío.

@@ -1,4 +1,4 @@
-const Loader = ({ isOpen, text ="Cargando" }) => {
+const LoaderModal = ({ isOpen, text ="Cargando" }) => {
   if (!isOpen) {
     return null;
   }
@@ -20,4 +20,4 @@ const Loader = ({ isOpen, text ="Cargando" }) => {
   )
 };
 
-export default Loader;
+export default LoaderModal;
