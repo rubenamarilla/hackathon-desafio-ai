@@ -104,17 +104,18 @@ El chatbot debe poseer las siguientes características:
 [
     {
         "key": "Nombre del lugar",
-        "type": "turístico" | "comida",
-        "location": { "lat": xx.xxxxx, "lng": xx.xxxxx }
+        "type": "El tipo del lugar. Catgorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
         "description": "Una descripción con un texto devuelto por 
         el chat-bot explicando por qué el lugar fué incluido en la lista",
         "address": "Dirección del lugar"
+        "location": { "lat": xx.xxxxx. Debe ser un valor numérico, "lng": xx.xxxxx. Debe ser un valor numérico }
     },
     ...
 ]
 ```
 
 El campo **location** es muy importante, pues debe contener la información de la latitud y longitud para poder pintar los marcadores en el mapa.
+Los valores de **lat** y **lng** deben ser **numéricos**, no cadenas de texto.
 
 #### Librería de OpenAI
 La librería para realizar consultas a la api de OpenAI ya se encuentra instalada en el proyecto:
@@ -141,8 +142,13 @@ Luego se debe inicializar la librería con la siguiente sintaxis;
 
 ```
 import OpenAIApi from 'openai';
-
 ...
+
+const configuration = {
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true
+};
+
 const openai = new OpenAIApi(configuration);
 ```
 
@@ -174,17 +180,20 @@ El formato de respuesta a lograr debe ser el siguiente:
 [
     {
         "key": "Nombre del lugar",
-        "type": "turístico" | "comida",
-        "location": { "lat": xx.xxxxx, "lng": xx.xxxxx }
+        "type": "El tipo del lugar. Catgorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
         "description": "Una descripción con un texto devuelto por 
         el chat-bot explicando por qué el lugar fué incluido en la lista",
         "address": "Dirección del lugar"
+        "location": { "lat": xx.xxxxx. Debe ser un valor numérico, "lng": xx.xxxxx. Debe ser un valor numérico }
     },
     ...
 ]
 ```
-
 ### Pintado de marcadores:
+
+El campo **location** de cada item, debe contener la información de la latitud y longitud para poder pintar los marcadores en el mapa.
+Los valores de **lat** y **lng** deben ser **numéricos**, no cadenas de texto.
+
 Se provee un componente con la lógica del mapa en el archivo [Map.jsx](src%2Fcomponents%2FMap.jsx)
 
 El mismo es un componente REACT que posee un **prop** denominado **locations**. Este **prop** puede recibir una lista 
