@@ -101,7 +101,7 @@ El chatbot debe poseer las siguientes características:
 - Debe utilizar la API de OpenAI para procesar las consultas y devolver información en un formato JSON compatible
   con la librería de mapas utilizada. Este formato lo mostramos a continuación:
 ```
-[
+resultado: [
     {
         "key": "Nombre del lugar",
         "type": "El tipo del lugar. Catgorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
@@ -177,7 +177,7 @@ que invoca a la API de OpenAI.
 El formato de respuesta a lograr debe ser el siguiente:
 
 ```
-[
+resultado: [
     {
         "key": "Nombre del lugar",
         "type": "El tipo del lugar. Catgorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
@@ -221,6 +221,17 @@ El resultado, cuando se utiliza el formato correcto, queda de la siguiente maner
 
 ![marcadores.png](public/marcadores.png)
 
+### Indicador de carga
+
+Cada equipo debe implementar un indicador de carga para el proceso de comunicación con la api de OpenAI, que provea algún
+feedback al usuario, pues la respuesta podría tardar. Cada equipo es libre de implementar esto de la forma que mejor le 
+parezca.
+
+Se provee un componente pre-construido denominado [LoaderModal](src%2Fcomponents%2FLoaderModal.jsx) que muestra un diálogo con indicador de carga, 
+que podría funcionar como feedback para el usuario final. El mismo puede ser utilizado a gusto por los participantes 
+para esta sección.
+Queda a criterio del equipo la decisión de utilizarlo y de cómo utilizarlo.
+
 ### Tarjetas con información de los lugares:
 Cada equipo debe implementar un componente que permita visualizar la información de los lugares encontrados. 
 
@@ -231,23 +242,17 @@ Cada tarjeta debe contener al menos los siguientes datos:
 * **dirección**. La dirección del lugar.
 
 
-#### Ayudas
+#### Ejemplo y Ayuda
 Como ejemplo, el componente podría consistir en un modal que se abre con un botón y muestra el listado de los lugares en forma de tarjetas,
 pero esto queda abierto a las ideas de cada equipo.
 
-Se proveen algunos componentes de ayuda. Cada equipo es libre de usar estos componentes o crear sus propios componentes con estilos a gusto. 
-
 Para las tarjetas se provee una pequeña ayuda, un componente denominado [Card](src%2Fcomponents%2FCard.jsx) que se puede utilizar para las tarjetas 
 de información. El mismo tiene los props **nombre, tipo, direccion y descripcion**. Como utilizarlo en una lista
-queda a la creatividad de los participantes.
+queda a la creatividad de los participantes. Cada equipo es libre de usar este componente o crear su propio componente 
+con estilos a gusto.
 
 Un ejemplo de como se podrían ver las tarjetas:
 ![tarjetas.png](public/tarjetas.png)
-
-También se provee un componente pre-construido denominado [LoaderModal](src%2Fcomponents%2FLoaderModal.jsx)
-que muestra un diálogo con indicador de carga, que funciona como feedback para el usuario final.
-El mismo puede ser utilizado a gusto por los participantes para esta sección.
-Queda a criterio del participante la decisión de utilizarlo y de cómo utilizarlo.
 
 ## Desafío BONUS
 
@@ -318,6 +323,7 @@ puedan revisarlo.
 
 ### OpenAI
 * [API de OpenAI](https://platform.openai.com/docs/overview)
+* [API Text Generation](https://platform.openai.com/docs/guides/text-generation)
 * [API Chat Completion](https://platform.openai.com/docs/guides/text-generation/chat-completions-api)
 
 ### React
