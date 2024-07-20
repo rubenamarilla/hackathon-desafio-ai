@@ -54,6 +54,7 @@ const App = () => {
   const handleSend = async () => {
     setMessage(actualMessage);
     setLoading(true);
+    setActualMessage("");
     const response = await getData(message);
     setLoading(false);
     setResponseMessage(response);
