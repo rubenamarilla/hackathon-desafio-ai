@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { useState } from "react";
 import { Home } from "./pages/Home.jsx";
+import lugares from '../src/assets/lugares.json';
 
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -8,18 +9,13 @@ const openai = new OpenAI({
 });
 
 async function getData(userMessage) {
+  const lugaresContext = JSON.stringify(lugares);
   try {
     const chatCompletion = await openai.chat.completions.create({
       messages: [
         {
-          role: "system",
-          content: `el usuario te pedira lugares turisticos, debes responder con lugares turisticos de ese lugar, pero en formato json, con este formato, no respondas de otra manera: {
-            "key": "Nombre del lugar",
-            "type": "El tipo del lugar. Categorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
-            "description": "Una descripción con un texto devuelto por el chat-bot explicando por qué el lugar fué incluido en la lista",
-            "address": "Dirección del lugar",
-            "location": { "lat": xx.xxxxx, "lng": xx.xxxxx }
-          }, RESPONDEME SI O SI EN ARRAY`,
+          role: 'system',
+          content: `El usuario te pedirá lugares turísticos. Debes responder con lugares turísticos de esa lista en formato JSON. Lista de lugares: ${lugaresContext}, ten en cuenta, que siempre debes responder con un array de posibles respuestas`
         },
         { role: "user", content: userMessage },
       ],
@@ -30,6 +26,7 @@ async function getData(userMessage) {
 
     try {
       const jsonResponse = JSON.parse(responseContent);
+
       if (!Array.isArray(jsonResponse)) {
         throw new Error('La respuesta no es un array');
       }

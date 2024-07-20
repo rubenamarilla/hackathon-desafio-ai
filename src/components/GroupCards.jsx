@@ -18,7 +18,7 @@ const GroupCards = ({ cards = [] }) => {
         data.map((card) => (
           <Card
             key={card.key}
-            nombre={card.key}
+            nombre={card.name || card.key}
             tipo={card.type}
             direccion={card.address}
             descripcion={card.description}
