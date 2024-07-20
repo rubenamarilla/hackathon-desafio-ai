@@ -30,7 +30,11 @@ async function getData(userMessage) {
     const responseContent = chatCompletion.choices[0].message.content;
     
     try {
-      return JSON.parse(responseContent);
+      const jsonResponse = JSON.parse(responseContent);
+      if (!Array.isArray(jsonResponse)) {
+        throw new Error('La respuesta no es un array');
+      }
+      return jsonResponse;
     } catch (jsonError) {
       console.error('Error parsing JSON response:', jsonError);
       return { error: 'Invalid JSON response from API' };
