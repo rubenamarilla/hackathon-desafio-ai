@@ -21,9 +21,11 @@ export const Home = ({
     <div className="flex justify-center items-center">
       <div className="w-4/5 justify-center m-0 p-3 bg-slate-100 flex items-center">
         <div className="shadow-lg p-10 m-10 bg-white rounded-lg w-3/4 h-auto">
-          <div className="flex justify-end">
-            <Card className={classes.styleResponde}>{message}</Card>
-          </div>
+          {message.length > 0 && (
+            <div className="flex justify-end">
+              <Card className={classes.styleResponde}>{message}</Card>
+            </div>
+          )}
           <MapComponent locations={places} />
           <GroupCards cards={responseMessage} />
           {loading ? (
