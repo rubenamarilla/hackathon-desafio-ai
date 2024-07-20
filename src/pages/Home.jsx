@@ -15,7 +15,7 @@ export const Home = ({
   loading,
 }) => {
   return (
-    <div className="w-screen h-screen m-0 p-3 bg-slate-500">
+    <div className="w-screen h-screen justify-center m-0 p-3 bg-slate-100">
       <MapComponent locations={places} />
       {/* <LocationList locations={responseMessage} /> */}
       {loading ? (
@@ -24,20 +24,21 @@ export const Home = ({
         </div>
       ) : null}
 
-      <div className="flex gap-2 items-center">
-        <textarea
-          className="w-full h-32 p-2 mb-2 bg-slate-400 text-white"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Escribe tu mensaje aquí"
-        />
-        <button
-          className="rounded bg-sky-600 py-2 px-4 text-sm text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700"
-          onClick={handleSend}
-        >
-          Enviar
-        </button>
-      </div>
+<div className="flex items-center mt-5 justify-center" style={{ width: "100%" }}>
+    <textarea
+      style={{ width: "100%", height: "50px" }}
+      className="p-2 mb-2 bg-white text-black rounded-lg shadow-lg border border-gray-300"
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      placeholder="Escribe tu mensaje aquí"
+    />
+    <Button
+      shape="circle"
+      icon={<UpOutlined />}
+      onClick={handleSend}
+      className="ml-2"
+    ></Button>
+  </div>
     </div>
   );
 };
