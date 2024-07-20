@@ -23,6 +23,7 @@ export const Home = ({
             <Card className={classes.styleResponde}>{message}</Card>
           </div>
           <MapComponent locations={places} />
+          <GroupCards cards={responseMessage} />
           {loading ? (
             <div className="flex w-full justify-center my-5">
               <Spin size="large" />
@@ -49,7 +50,6 @@ export const Home = ({
           </div>
         </div>
       </div>
-      <GroupCards cards={responseMessage} />
     </div>
   );
 };
