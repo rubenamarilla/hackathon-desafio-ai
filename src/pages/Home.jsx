@@ -1,3 +1,4 @@
+import GroupCards from "../components/GroupCards";
 import MapComponent from "../components/Map";
 
 export const Home = ({
@@ -23,6 +24,7 @@ export const Home = ({
           readOnly
           placeholder="Respuesta de la IA"
         />
+        <GroupCards cards={responseMessage} />
       </div>
     </div>
   );
