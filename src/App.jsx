@@ -50,16 +50,14 @@ async function getData(userMessage) {
 
 const App = () => {
   const [places, setPlaces] = useState([]);
-  const [message, setMessage] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [actualMessage, setActualMessage] = useState("");
 
   const handleSend = async () => {
-    setMessage(actualMessage);
     setLoading(true);
+    const response = await getData(actualMessage); // Usar actualMessage directamente
     setActualMessage("");
-    const response = await getData(message);
     setLoading(false);
     setResponseMessage(response);
 
@@ -75,9 +73,8 @@ const App = () => {
   return (
     <Home
       places={places}
-      message={message}
+      message={actualMessage} // Pasar actualMessage a Home
       loading={loading}
-      setMessage={setMessage}
       handleSend={handleSend}
       responseMessage={responseMessage}
       setActualMessage={setActualMessage}
