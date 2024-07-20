@@ -13,6 +13,7 @@
     "@headlessui/react": "^0.0.0-insiders.ff41b27",
     "@react-google-maps/api": "^2.19.3",
     "@vis.gl/react-google-maps": "^1.1.0",
+    "ai": "^3.2.32",
     "antd": "^5.19.3",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
