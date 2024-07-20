@@ -1,4 +1,5 @@
 import MapComponent from "../components/Map";
+import { Flex, Spin } from 'antd';
 
 export const Home = ({
   places,
@@ -6,11 +7,18 @@ export const Home = ({
   setMessage,
   handleSend,
   responseMessage,
+  loading,
 }) => {
   return (
     <div className="w-screen h-screen m-0 p-3 bg-slate-500">
       <MapComponent locations={places} />
       {/* <LocationList locations={responseMessage} /> */}
+     {
+      loading ? <div className="flex w-full justify-center my-5">
+      <Spin size="large" />
+     </div> : null
+     }
+
       <div className="flex gap-2 items-center">
         <textarea
           className="w-full h-32 p-2 mb-2 bg-slate-400 text-white"
