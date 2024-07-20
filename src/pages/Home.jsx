@@ -1,6 +1,11 @@
 import GroupCards from "../components/GroupCards";
+import { Button, Card } from "antd";
 import MapComponent from "../components/Map";
 import { Flex, Spin } from "antd";
+import { UpOutlined } from "@ant-design/icons";
+import TextArea from "antd/es/input/TextArea";
+import Search from "antd/es/input/Search";
+import classes from "./styleHome.module.css";
 
 export const Home = ({
   places,
@@ -11,29 +16,38 @@ export const Home = ({
   loading,
 }) => {
   return (
-    <div className="w-screen h-screen m-0 p-3 bg-slate-500">
-      <MapComponent locations={places} />
-      {/* <LocationList locations={responseMessage} /> */}
-      {loading ? (
-        <div className="flex w-full justify-center align-center my-5 gap-3">
-          <Spin size="large" />
-          <span>Buscando lugares en esa zona...</span>
-        </div>
-      ) : null}
+    <div className="flex justify-center items-center">
+      <div className="w-4/5 justify-center m-0 p-3 bg-slate-100 flex items-center">
+        <div className="shadow-lg p-10 m-10 bg-white rounded-lg w-3/4 h-auto">
+          <div>
+            <Card className={classes.styleResponde}>{message}</Card>
+          </div>
+          <MapComponent locations={places} />
+          {loading ? (
+            <div className="flex w-full justify-center my-5">
+              <Spin size="large" />
+            </div>
+          ) : null}
 
-      <div className="flex gap-2 items-center">
-        <textarea
-          className="w-full h-32 p-2 mb-2 bg-slate-400 text-white"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Escribe tu mensaje aquí"
-        />
-        <button
-          className="rounded bg-sky-600 py-2 px-4 text-sm text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700"
-          onClick={handleSend}
-        >
-          Enviar
-        </button>
+          <div
+            className="flex items-center mt-5 justify-center"
+            style={{ width: "100%" }}
+          >
+            <textarea
+              style={{ width: "100%", height: "50px" }}
+              className="p-2 mb-2 bg-white text-black rounded-lg shadow-lg border border-gray-300"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Escribe tu mensaje aquí"
+            />
+            <Button
+              shape="circle"
+              icon={<UpOutlined />}
+              onClick={handleSend}
+              className="ml-2"
+            ></Button>
+          </div>
+        </div>
       </div>
       <GroupCards cards={responseMessage} />
     </div>
