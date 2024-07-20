@@ -16,7 +16,7 @@ async function getData(userMessage) {
           role: 'system', 
           content: `el usuario te pedira lugares turisticos, debes responder con lugares turisticos de ese lugar, pero en formato json, con este formato, no respondas de otra manera: {
             "key": "Nombre del lugar",
-            "type": "El tipo del lugar. Categoria: Turístico",
+            "type": "El tipo del lugar. Categorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
             "description": "Una descripción con un texto devuelto por el chat-bot explicando por qué el lugar fué incluido en la lista",
             "address": "Dirección del lugar",
             "location": { "lat": xx.xxxxx, "lng": xx.xxxxx }
@@ -25,7 +25,6 @@ async function getData(userMessage) {
         { role: 'user', content: userMessage }
       ],
       model: 'gpt-4-turbo',
-      response_format: { "type": "json_object" },
     });
 
     const responseContent = chatCompletion.choices[0].message.content;

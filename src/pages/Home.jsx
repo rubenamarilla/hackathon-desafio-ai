@@ -18,7 +18,7 @@ export const Home = ({
 
   return (
    <div className="flex justify-center items-center">
-    <div className="w-4/5 h-[400px] justify-center m-0 p-3 bg-slate-100 flex items-center">
+    <div className="w-4/5 justify-center m-0 p-3 bg-slate-100 flex items-center">
       <div className="shadow-lg p-10 m-10 bg-white rounded-lg w-3/4 h-auto">
       <div>
         <Card className={classes.styleResponde}>{message}</Card>
