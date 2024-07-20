@@ -2,7 +2,6 @@ import OpenAI from "openai";
 import { useState } from "react";
 import { Home } from "./pages/Home.jsx";
 
-
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true,
@@ -12,36 +11,34 @@ async function getData(userMessage) {
   try {
     const chatCompletion = await openai.chat.completions.create({
       messages: [
-        { 
-          role: 'system', 
+        {
+          role: "system",
           content: `el usuario te pedira lugares turisticos, debes responder con lugares turisticos de ese lugar, pero en formato json, con este formato, no respondas de otra manera: {
             "key": "Nombre del lugar",
             "type": "El tipo del lugar. Categorias: Turístico, Comida, Desayunos y meriendas, Alojamiento, Tecnología, Compras, Otros",
             "description": "Una descripción con un texto devuelto por el chat-bot explicando por qué el lugar fué incluido en la lista",
             "address": "Dirección del lugar",
             "location": { "lat": xx.xxxxx, "lng": xx.xxxxx }
-          }, RESPONDEME SI O SI EN ARRAY` 
+          }, RESPONDEME SI O SI EN ARRAY`,
         },
-        { role: 'user', content: userMessage }
+        { role: "user", content: userMessage },
       ],
-      model: 'gpt-4-turbo',
+      model: "gpt-4-turbo",
     });
 
     const responseContent = chatCompletion.choices[0].message.content;
-    
+
     try {
       return JSON.parse(responseContent);
     } catch (jsonError) {
-      console.error('Error parsing JSON response:', jsonError);
-      return { error: 'Invalid JSON response from API' };
+      console.error("Error parsing JSON response:", jsonError);
+      return { error: "Invalid JSON response from API" };
     }
-
   } catch (apiError) {
-    console.error('Error calling OpenAI API:', apiError);
-    return { error: 'Error calling OpenAI API' };
+    console.error("Error calling OpenAI API:", apiError);
+    return { error: "Error calling OpenAI API" };
   }
 }
-
 
 const App = () => {
   const [places, setPlaces] = useState([]);
@@ -53,7 +50,7 @@ const App = () => {
     setLoading(true);
     const response = await getData(message);
     setLoading(false);
-    setResponseMessage(JSON.stringify(response, null, 2));
+    setResponseMessage(response);
 
     const formattedPlaces = response.map((item, index) => ({
       key: index.toString(),

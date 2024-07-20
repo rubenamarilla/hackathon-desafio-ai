@@ -1,47 +1,31 @@
+import { useEffect, useState } from "react";
 import Card from "./Card";
+import classes from "./GroupCards.module.css";
+import { Carousel } from "antd";
 
-const GroupCards = (cards = []) => {
-  console.log(cards);
-  if (cards.length > 0 && typeof cards[0] === "object") {
-    return cards.map((card) => (
-      <Card
-        key={card.key}
-        nombre={card.title}
-        tipo={card.type}
-        direccion={card.address}
-        descripcion={card.description}
-      />
-    ));
-  }
+const GroupCards = ({ cards = [] }) => {
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      nombre: "Casa de Juan",
-      tipo: "Casa",
-      direccion: "Calle 123",
-      descripcion: "Casa de Juan",
-    },
-    {
-      nombre: "Casa de Pedro",
-      tipo: "Casa",
-      direccion: "Calle 456",
-      descripcion: "Casa de Pedro",
-    },
-  ];
+  useEffect(() => {
+    setData(cards);
 
-  //   return (
-  //     <>
-  //       {cards.map((card) => (
-  //         <Card
-  //           key={card.nombre}
-  //           nombre={card.nombre}
-  //           tipo={card.tipo}
-  //           direccion={card.direccion}
-  //           descripcion={card.descripcion}
-  //         />
-  //       ))}
-  //     </>
-  //   );
+    console.log(cards);
+  }, [cards]);
+
+  return (
+    <div className={classes.container}>
+      {data.length > 0 &&
+        data.map((card) => (
+          <Card
+            key={card.key}
+            nombre={card.key}
+            tipo={card.type}
+            direccion={card.address}
+            descripcion={card.description}
+          />
+        ))}
+    </div>
+  );
 };
 
 export default GroupCards;

@@ -15,8 +15,9 @@ export const Home = ({
       <MapComponent locations={places} />
       {/* <LocationList locations={responseMessage} /> */}
       {loading ? (
-        <div className="flex w-full justify-center my-5">
+        <div className="flex w-full justify-center align-center my-5 gap-3">
           <Spin size="large" />
+          <span>Buscando lugares en esa zona...</span>
         </div>
       ) : null}
 
@@ -34,6 +35,7 @@ export const Home = ({
           Enviar
         </button>
       </div>
+      <GroupCards cards={responseMessage} />
     </div>
   );
 };
