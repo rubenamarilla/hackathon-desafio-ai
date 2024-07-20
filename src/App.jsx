@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { useState } from "react";
 import { Home } from "./pages/Home.jsx";
+import { message } from "antd";
 import lugares from '../src/assets/lugares.json';
 
 const openai = new OpenAI({
@@ -28,15 +29,18 @@ async function getData(userMessage) {
       const jsonResponse = JSON.parse(responseContent);
 
       if (!Array.isArray(jsonResponse)) {
-        throw new Error('La respuesta no es un array');
+        message.error("Hubo un error, intenta de nuevo");
+        throw new Error("La respuesta no es un array");
       }
       return jsonResponse;
     } catch (jsonError) {
       console.error("Error parsing JSON response:", jsonError);
+      message.error("Hubo un error, intenta de nuevo");
       return { error: "Invalid JSON response from API" };
     }
   } catch (apiError) {
     console.error("Error calling OpenAI API:", apiError);
+    message.error("Hubo un error, intenta de nuevo");
     return { error: "Error calling OpenAI API" };
   }
 }
