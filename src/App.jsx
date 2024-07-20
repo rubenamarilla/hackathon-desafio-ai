@@ -52,8 +52,10 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [actualMessage, setActualMessage] = useState("");
 
   const handleSend = async () => {
+    setMessage(actualMessage);
     setLoading(true);
     const response = await getData(message);
     setLoading(false);
@@ -76,6 +78,8 @@ const App = () => {
       setMessage={setMessage}
       handleSend={handleSend}
       responseMessage={responseMessage}
+      setActualMessage={setActualMessage}
+      actualMessage={actualMessage}
     />
   );
 };

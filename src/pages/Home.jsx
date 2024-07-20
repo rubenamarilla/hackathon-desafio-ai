@@ -14,13 +14,15 @@ export const Home = ({
   handleSend,
   responseMessage,
   loading,
+  setActualMessage,
+  actualMessage,
 }) => {
 
   return (
    <div className="flex justify-center items-center">
     <div className="w-4/5 justify-center m-0 p-3 bg-slate-100 flex items-center">
       <div className="shadow-lg p-10 m-10 bg-white rounded-lg w-3/4 h-auto">
-      <div>
+      <div className="flex justify-end">
         <Card className={classes.styleResponde}>{message}</Card>
       </div>
         <MapComponent locations={places} />
@@ -34,8 +36,8 @@ export const Home = ({
                 <textarea
                   style={{ width: "100%", height: "50px" }}
                   className="p-2 mb-2 bg-white text-black rounded-lg shadow-lg border border-gray-300"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  value={actualMessage}
+                  onChange={(e) => setActualMessage(e.target.value)}
                   placeholder="Escribe tu mensaje aquí"
                 />
                 <Button
